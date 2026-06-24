@@ -5,6 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Tests passed\""
+    "test": "echo \"Tests passed\"",
+     "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.7.0"
   }
 }

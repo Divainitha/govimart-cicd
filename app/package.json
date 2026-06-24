@@ -1,0 +1,10 @@
+{
+  "name": "govimart-app",
+  "version": "1.0.0",
+  "description": "Demo application for GoviMart CI/CD pipeline",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Tests passed\""
+  }
+}

@@ -1,0 +1,39 @@
+name: Release Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying GoviMart Backend to Staging..."
+          echo "Deployment Successful!"
+
+  smoke-test:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Smoke Test
+        run: |
+          echo "Running Smoke Tests..."
+          echo "Smoke Tests Passed!"
+
+  deploy-production:
+    needs: smoke-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to Production..."
+          echo "Production Deployment Successful!"

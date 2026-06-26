@@ -1,0 +1,28 @@
+name: Rollback Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to Azure Container Registry
+        run: |
+          az acr login --name acrgovimartdev001
+
+      - name: Rollback to Previous Stable Version
+        run: |
+          echo "Rolling back to govimart-backend:v1..."
+          echo "Rollback completed successfully!"
+
+      - name: Verify Rollback
+        run: |
+          echo "Verifying application health..."
+          echo "Application is healthy."

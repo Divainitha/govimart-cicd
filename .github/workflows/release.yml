@@ -37,3 +37,8 @@ jobs:
         run: |
           echo "Deploying to Production..."
           echo "Production Deployment Successful!"
+
+      - name: Create Release Tag
+        run: |
+          git tag v1.0.${{ github.run_number }}
+          git push origin --tags

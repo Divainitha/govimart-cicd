@@ -22,24 +22,29 @@ jobs:
         run: |
           az acr login --name acrgovimartdev001
 
+      - name: Run ESLint
+        run: |
+          cd app
+          npm install
+          npm run lint
+
+      - name: Dependency Scan
+        run: |
+          cd app
+          npm audit || true
+
       - name: Build Docker Image
         run: |
           docker build -t acrgovimartdev001.azurecr.io/govimart-backend:v2 .
 
-      - name: Scan Docker Image
-        uses: aquasecurity/trivy-action@master
-
-        with:
-             image-ref: acrgovimartdev001.azurecr.io/govimart-backend:v2
-
       - name: Scan Docker Image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-         image-ref: acrgovimartdev001.azurecr.io/govimart-backend:v2
-         format: table
-         exit-code: 0
-         ignore-unfixed: true
-         severity: CRITICAL,HIGH
+          image-ref: acrgovimartdev001.azurecr.io/govimart-backend:v2
+          format: table
+          exit-code: 0
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH
 
       - name: Push Docker Image
         run: |
